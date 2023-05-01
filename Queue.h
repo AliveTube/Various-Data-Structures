@@ -1,7 +1,11 @@
 #pragma once
 
+#include <bits/stdc++.h>
 #include <exception>
-#include <iostream>
+
+using namespace std;
+
+
 
 template<typename T>
 struct QueueNode {

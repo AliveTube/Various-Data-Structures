@@ -1,5 +1,8 @@
-#include <bits/stdc++.h>
+#pragma once
+
+#include<iostream>
 using namespace std;
+
 template <typename T>
 class List {
     private:
@@ -107,16 +110,14 @@ class List {
         }
 };
 
-
-
-int main(){
-   List <int> lst(4);
-   lst.insert(2);
-   lst.insert(4);
-   lst.insertAt(6,1);
-   lst.insertAt(44,1);
-   lst.removeAt(0);
-   lst.print();
-   lst.clear();
-   lst.print();
-}
+// int main(){
+//    List <int> lst(4);
+//    lst.insert(2);
+//    lst.insert(4);
+//    lst.insertAt(6,1);
+//    lst.insertAt(44,1);
+//    lst.removeAt(0);
+//    lst.print();
+//    lst.clear();
+//    lst.print();
+// }
