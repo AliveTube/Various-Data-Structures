@@ -15,6 +15,29 @@ template<typename T>
 class CircularLinkedList {
     LinkedListNode<T> *head = nullptr, *tail = nullptr;
     int size = 0;
+
+    LinkedListNode<T> *retriveNodeAt(int index) {
+        if (index >= size) {
+            throw std::exception();
+        }
+
+        int cnt = 0;
+        auto *curNode = head;
+        if (index <= size / 2) {
+            while (cnt < index) {
+                curNode = curNode->nxt;
+                cnt++;
+            }
+        } else {
+            while (cnt < size - index) {
+                curNode = curNode->prev;
+                cnt++;
+            }
+        }
+
+        return curNode;
+    }
+
 public:
     void insertAtHead(T element) {
         auto *newNode = new LinkedListNode<T>(element);
@@ -71,18 +94,7 @@ public:
         }
 
         int cnt = 0;
-        auto *curNode = head;
-        if (index <= size / 2) {
-            while (cnt < index) {
-                curNode = curNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - index) {
-                curNode = curNode->prev;
-                cnt++;
-            }
-        }
+        auto *curNode = retriveNodeAt(index);
 
         auto prev = curNode->prev;
         curNode->prev = newNode;
@@ -136,18 +148,7 @@ public:
         }
 
         int cnt = 0;
-        auto *curNode = head;
-        if (index <= size / 2) {
-            while (cnt < index) {
-                curNode = curNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - index) {
-                curNode = curNode->prev;
-                cnt++;
-            }
-        }
+        auto *curNode = retriveNodeAt(index);
 
         auto nxt = curNode->nxt;
         auto prev = curNode->prev;
@@ -163,21 +164,8 @@ public:
         if (index >= size) {
             throw std::exception();
         }
-
         int cnt = 0;
-        auto *curNode = head;
-        if (index <= size / 2) {
-            while (cnt < index) {
-                curNode = curNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - index) {
-                curNode = curNode->prev;
-                cnt++;
-            }
-        }
-
+        auto *curNode = retriveNodeAt(index);
         return curNode->value;
     }
 
@@ -187,18 +175,7 @@ public:
         }
 
         int cnt = 0;
-        auto *curNode = head;
-        if (index <= size / 2) {
-            while (cnt < index) {
-                curNode = curNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - index) {
-                curNode = curNode->prev;
-                cnt++;
-            }
-        }
+        auto *curNode = retriveNodeAt(index);
 
         curNode->value = element;
     }
@@ -218,18 +195,7 @@ public:
         }
 
         int cnt = 0;
-        auto *curNode = head;
-        if (index <= size / 2) {
-            while (cnt < index) {
-                curNode = curNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - index) {
-                curNode = curNode->prev;
-                cnt++;
-            }
-        }
+        auto *curNode = retriveNodeAt(index);
 
         return element == curNode->value;
     }
@@ -238,33 +204,21 @@ public:
         if (firstItemIndex >= size || secondItemIndex >= size) {
             throw std::exception();
         }
+        if (firstItemIndex > secondItemIndex) { std::swap(firstItemIndex, secondItemIndex); }
 
-        int cnt = 0;
-        auto *firstNode = head;
-        if (firstItemIndex <= size / 2) {
-            while (cnt < firstItemIndex) {
-                firstNode = firstNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - firstItemIndex - 1) {
-                firstNode = firstNode->prev;
-                cnt++;
-            }
-        }
+        LinkedListNode<T> *firstNode = retriveNodeAt(firstItemIndex);
+        LinkedListNode<T> *secondNode = retriveNodeAt(secondItemIndex);
 
-        cnt = 0;
-        auto *secondNode = head;
-        if (secondItemIndex <= size / 2) {
-            while (cnt < secondItemIndex) {
-                secondNode = secondNode->nxt;
-                cnt++;
-            }
-        } else {
-            while (cnt < size - secondItemIndex - 1) {
-                secondNode = secondNode->prev;
-                cnt++;
-            }
+        if (secondItemIndex - firstItemIndex == 1) {
+            firstNode->prev->nxt = secondNode;
+            secondNode->nxt->prev = firstNode;
+
+            firstNode->nxt = secondNode->nxt;
+            secondNode->nxt = firstNode;
+
+            secondNode->prev = firstNode->prev;
+            firstNode->prev = secondNode;
+            return;
         }
 
         auto tmp = firstNode->nxt;
@@ -275,11 +229,19 @@ public:
         firstNode->prev = secondNode->prev;
         secondNode->prev = tmp;
 
+
         firstNode->nxt->prev = firstNode;
         firstNode->prev->nxt = firstNode;
 
         secondNode->nxt->prev = secondNode;
         secondNode->prev->nxt = secondNode;
+
+        if (head == firstNode) {
+            head = secondNode;
+        }
+        if (tail == secondNode) {
+            tail = firstNode;
+        }
     }
 
     bool isEmpty() {
