@@ -109,15 +109,3 @@ class List {
             }
         }
 };
-
-// int main(){
-//    List <int> lst(4);
-//    lst.insert(2);
-//    lst.insert(4);
-//    lst.insertAt(6,1);
-//    lst.insertAt(44,1);
-//    lst.removeAt(0);
-//    lst.print();
-//    lst.clear();
-//    lst.print();
-// }
