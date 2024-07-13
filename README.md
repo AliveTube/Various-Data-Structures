@@ -20,6 +20,24 @@ This repository contains various advanced data structure implementations in C++ 
 - **stack.h**: Implementation of a stack.
 - **stackUsingQueues.cpp**: Implements a stack data structure using queues.
 
+## Usage
+
+To use any of the data structure implementations, follow these steps:
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/AliveTube/Variuos-Data-Structures.git
+    ```
+2. Navigate to the directory:
+    ```sh
+    cd Variuos-Data-Structures
+    ```
+3. Compile and run the desired C++ file using your preferred compiler. For example:
+    ```sh
+    g++ -o outputFileName fileName.cpp
+    ./outputFileName
+    ```
+
 ## Contributors
 
 - [Salah2Eddin](https://github.com/Salah2Eddin)
