@@ -26,7 +26,7 @@ To use any of the data structure implementations, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/AliveTube/Variuos-Data-Structures.git
+    git clone https://github.com/AliveTube/Various-Data-Structures
     ```
 2. Navigate to the directory:
     ```sh
